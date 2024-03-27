@@ -135,27 +135,7 @@ const showNote = (note,listona) => {
         modalView.style.display='none';
         document.querySelector('#input-id').value = note.id;
     })
-    exclui.addEventListener("click", (evt) => {
-        evt.preventDefault();
-        console.log("HORA DA EXCLUSÃO");
-        modalView.style.display='none';
-        notes.style.display='flex';
-        document.querySelector('#input-id').value = note.id;
-
-        let notes = localStorage-getItem('notes');
-        notes = JSON.parse(notes);
-
-        notes.forEach((item, i) => {
-            notes.id=parseInt(note.id);
-            if(notes.id == note.id){
-                
-            }
-        })
-
-    })
 }
-
-
 listNotes();
 
 
