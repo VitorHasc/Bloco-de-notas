@@ -24,6 +24,8 @@ btnCloseNote.addEventListener("click", (evt) => {
     notes.style.display="flex";
     modal.style.display="none";
     addNote.style.display='block';
+    document.querySelector('#input-id').value = "";
+    listNotes();
 });
 
 btnSaveNote.addEventListener("click", (evt) => {
@@ -44,12 +46,18 @@ const saveNote = (note) => {
     let notes = loadNotes();
     note.lastTime = new Date().getTime();
     // console.log(note.lastTime);
-    if(note.id.lenght > 0){
-        //?
+    if(note.id.length > 0){
+        notes.forEach((item, i) => {
+            note.id=parseInt(note.id);
+            if(item.id == note.id){
+                notes[i] = note;
+            }
+        })
     }else{
         note.id = new Date().getTime();
+        document.querySelector('#input-id').value = note.id;
+        notes.push(note);
     }
-    notes.push(note);
     // console.log(notes);
     notes = JSON.stringify(notes);
     // console.log(notes);
@@ -62,6 +70,7 @@ const loadNotes = () => {
         notes = [];
     }else{
         notes = JSON.parse(notes);
+
     }
     return notes;
 };
@@ -69,6 +78,7 @@ const loadNotes = () => {
 const listNotes = () => {
     let listNotes = localStorage.getItem('notes');
     listNotes = JSON.parse(listNotes);
+    notes.innerHTML = "";
     listNotes.forEach((item) => {
         const divCard = document.createElement('div');
         divCard.className = 'card';
