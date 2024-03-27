@@ -6,6 +6,9 @@ const notes = document.querySelector('#notes');//Lista divs com dados das notas
 const btnSaveNote = document.querySelector("#btn-save-note"); //icone para salvar nota
 const btnCloseNote = document.querySelector("#btn-close-note");//icone para fechar modal de edição de nota.
 
+const edit = document.querySelector('#editb');
+const exclui = document.querySelector('#excluirb');
+
 // ------------------------------------------------------------------
 // ---------------------------EVENTOS--------------------------------
 // ------------------------------------------------------------------
@@ -105,7 +108,7 @@ const listNotes = () => {
 
         divCard.addEventListener("click", (evt) => {
             evt.preventDefault();
-            showNote(item);
+            showNote(item,listNotes);
         });
 
         closeModal.addEventListener("click", (evt) => {
@@ -117,7 +120,7 @@ const listNotes = () => {
     });
 };
 
-const showNote = (note) => {
+const showNote = (note,listona) => {
     notes.style.display = 'none';
     modalView.style.display = 'block';
     addNote.style.display = 'none';
@@ -125,6 +128,34 @@ const showNote = (note) => {
     document.querySelector('#title-note').innerHTML = "<h1>"+note.title+"</h1>";
     document.querySelector('#content-note').innerHTML = "<p>"+note.content+"</p>";
     document.querySelector('#content-note').innerHTML += "<p>Ultima atualização: "+new Date(note.lastTime).toLocaleDateString('pt-BR')+"</p>";
+    edit.addEventListener("click", (evt) => {
+        evt.preventDefault();
+        console.log("Botão abrindo!");
+        modal.style.display='block';
+        modalView.style.display='none';
+        document.querySelector('#input-id').value = note.id;
+    })
+    exclui.addEventListener("click", (evt) => {
+        evt.preventDefault();
+        console.log("HORA DA EXCLUSÃO");
+        modalView.style.display='none';
+        notes.style.display='flex';
+        document.querySelector('#input-id').value = note.id;
+
+        let notes = localStorage-getItem('notes');
+        notes = JSON.parse(notes);
+
+        notes.forEach((item, i) => {
+            notes.id=parseInt(note.id);
+            if(notes.id == note.id){
+                
+            }
+        })
+
+    })
 }
 
+
 listNotes();
+
+
