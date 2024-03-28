@@ -9,6 +9,11 @@ const btnCloseNote = document.querySelector("#btn-close-note");//icone para fech
 const edit = document.querySelector('#editb');
 const exclui = document.querySelector('#excluirb');
 
+const ptitle  = document.querySelector('#input-title');
+const pcontent = document.querySelector('#input-content');
+
+const noteshtml = document.querySelector('#notes');
+
 // ------------------------------------------------------------------
 // ---------------------------EVENTOS--------------------------------
 // ------------------------------------------------------------------
@@ -19,6 +24,8 @@ addNote.addEventListener("click", (evt) => {
     notes.style.display='none';
     modal.style.display='block';
     addNote.style.display='none';
+    ptitle.value = ''; 
+    pcontent.value = ''; 
 });
 
 btnCloseNote.addEventListener("click", (evt) => {
@@ -65,7 +72,21 @@ const saveNote = (note) => {
     notes = JSON.stringify(notes);
     // console.log(notes);
     localStorage.setItem('notes', notes);
-};
+}
+
+const deleteNote = (note) => {
+    console.log("pikasso");
+    let notes = loadNotes();
+    note.id = parseInt(note.id);
+    notes.forEach((item, i) => {
+        if(item.id == note.id){
+            notes.splice(i, 1);
+        }
+    })  
+    notes = JSON.stringify(notes);
+    localStorage.setItem('notes', notes);
+    listNotes();
+}   
 
 const loadNotes = () => {
     let notes = localStorage.getItem('notes');
@@ -130,10 +151,25 @@ const showNote = (note,listona) => {
     document.querySelector('#content-note').innerHTML += "<p>Ultima atualização: "+new Date(note.lastTime).toLocaleDateString('pt-BR')+"</p>";
     edit.addEventListener("click", (evt) => {
         evt.preventDefault();
+        ptitle.value = note.title; 
+        pcontent.value = note.content; 
         console.log("Botão abrindo!");
         modal.style.display='block';
         modalView.style.display='none';
         document.querySelector('#input-id').value = note.id;
+    })
+    exclui.addEventListener("click", (evt) => {
+        if (confirm("Tem certeza que deseja deletar?") == true) {
+            deleteNote(note);
+            console.log("Você confirmou!");
+        } else {
+            console.log("Você cancelou!");
+        }
+        modalView.style.display = 'none';
+        notes.style.display="flex";
+        modal.style.display="none";
+        addNote.style.display='block';
+        listNotes();
     })
 }
 listNotes();
