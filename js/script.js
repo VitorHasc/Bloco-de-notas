@@ -159,12 +159,7 @@ const showNote = (note,listona) => {
         document.querySelector('#input-id').value = note.id;
     })
     exclui.addEventListener("click", (evt) => {
-        if (confirm("Tem certeza que deseja deletar?") == true) {
-            deleteNote(note);
-            console.log("Você confirmou!");
-        } else {
-            console.log("Você cancelou!");
-        }
+        deleteNote(note);
         modalView.style.display = 'none';
         notes.style.display="flex";
         modal.style.display="none";
