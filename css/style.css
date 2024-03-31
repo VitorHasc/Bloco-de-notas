@@ -1,3 +1,11 @@
+
+body{
+  background-image: url("images/rename.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
 *{
     margin:0;
     padding:0;
@@ -10,8 +18,9 @@
   }
   
   #logo{
+    margin-top: 10px;
     width: 30vw;
-    height: 10vh;
+    height: 10vh; 
     margin-left: 2%; /*do vitor*/
   }
   
@@ -47,6 +56,7 @@
     display:none;
     width: 90vw;
     padding:10px;
+    background-color: white;
    
   }
   
@@ -60,6 +70,7 @@
     padding:2vh 2vw;
     display:none;
     width: 90vw;
+    background-color: white;
   }
   
   #controls-note{
@@ -67,3 +78,30 @@
     gap:10px;
   }
   
+  .card{
+    margin: 15px;
+    border-color:#1b85dc;
+  }
+ 
+
+.minhavez div {
+    display: inline-block; 
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+
+::-webkit-scrollbar-track {
+  
+  background: #104e81; 
+}
+
+
+::-webkit-scrollbar-thumb {
+
+  background-color: #1b85dc; 
+  border-radius: 3px; 
+
+}
